@@ -61,7 +61,7 @@ const Application: React.FC = () => {
             })}
           </Grid.Column>
           <Grid.Column textAlign="right">
-            <Button color="blue" content="Validate" disabled={loading || !! ceramicInstance} onClick={onValidate} />
+            <Button loading={loading} color="blue" content="Validate" disabled={loading || !! ceramicInstance} onClick={onValidate} />
           </Grid.Column>
         </Grid>
       </Form>
