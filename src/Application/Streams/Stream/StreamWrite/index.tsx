@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stream as IStream } from '@ceramicnetwork/common';
-import { useCeramicClient } from '../../../../hooks';
+// import { useCeramicClient } from '../../../../hooks';
 import { Button } from 'semantic-ui-react';
 
 interface StreamWriteProps {
@@ -8,11 +8,11 @@ interface StreamWriteProps {
 }
 
 const StreamWrite: React.FC<StreamWriteProps> = ({ stream }) => {
-  const ceramicClient = useCeramicClient();
+  // const ceramicClient = useCeramicClient();
 
   const onSubmit = async () => {
     try {
-      await ceramicClient.applyCommit(stream.id, '??', {})
+      // await ceramicClient.applyCommit(stream.id, '??', {})
     } catch (e) {
       alert(e.message);
       console.log(e);

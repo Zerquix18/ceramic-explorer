@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stream as IStream } from '@ceramicnetwork/common';
-import { Divider, Grid, List } from 'semantic-ui-react';
+import { Divider, List } from 'semantic-ui-react';
 
 interface StreamInfoProps {
   stream: IStream;
