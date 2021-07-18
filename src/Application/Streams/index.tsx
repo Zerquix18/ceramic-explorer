@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
-import { Header, List } from 'semantic-ui-react';
+import { Button, Header, List, Message } from 'semantic-ui-react';
+
 import Stream from './Stream';
+import StreamModal from './StreamModal';
 
 interface StreamsProps {
 }
 
 // no way to "list" streams?
-const defaultStreamIds = ['k2t6wyfsu4pg24335djuw5lkqkqwsz2eec85tb6p0lovq6juwv7h3f4f2x2oa3'];
+const defaultStreamIds: string[] = [];
 
 const Streams: React.FC<StreamsProps> = () => {
   const [selectedStreamId, setSelectedStreamId] = useState('');
+  const [streamModalOpen, setStreamModalOpen] = useState(false);
+
+  const toggleStreamModal = () => {
+    setStreamModalOpen(state => !state);
+  };
 
   return (
     <div>
       <Header as="h3">Streams</Header>
+
+      <div style={{ textAlign: 'right' }}>
+        <Button color="blue" icon="add" content="Add stream" onClick={toggleStreamModal} />
+      </div>
+
+      { defaultStreamIds.length === 0 && (
+        <Message color="yellow" header="No streams" content="No streams to display." />
+      )}
 
       <List size="big" divided>
         { defaultStreamIds.map(streamId => {
@@ -32,6 +47,11 @@ const Streams: React.FC<StreamsProps> = () => {
           );
         })}
       </List>
+
+      { streamModalOpen && (
+        <StreamModal onClose={toggleStreamModal} />
+      )}
+
     </div>
   );
 };
