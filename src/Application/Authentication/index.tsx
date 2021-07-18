@@ -10,6 +10,7 @@ interface AuthenticationProps {
 }
 
 const Authentication: React.FC<AuthenticationProps> = ({ ceramicClient }) => {
+  const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onConnect = async () => {
@@ -20,12 +21,11 @@ const Authentication: React.FC<AuthenticationProps> = ({ ceramicClient }) => {
       const authProvider = new EthereumAuthProvider(window.ethereum, addresses[0]);
       await threeIdConnect.connect(authProvider);
 
-      const provider = await threeIdConnect.getDidProvider()
+      const provider = threeIdConnect.getDidProvider()
 
       ceramicClient.did!.setProvider(provider);
       await ceramicClient.did!.authenticate();
-
-      alert('All good!');
+      setAuthenticated(true);
     } catch (e) {
       console.log(e);
       alert(e.message);
@@ -37,12 +37,12 @@ const Authentication: React.FC<AuthenticationProps> = ({ ceramicClient }) => {
   return (
     <div>
       <Button
-        disabled={loading}
+        disabled={loading || authenticated}
         loading={loading}
         size="small"
         color="blue"
-        icon="user"
-        content="Connect using wallet"
+        icon={authenticated ? 'check' : 'user' }
+        content={authenticated ? 'Authenticated' : 'Connect using wallet'}
         onClick={onConnect}
       />
     </div>

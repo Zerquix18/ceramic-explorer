@@ -11,7 +11,7 @@ import Authentication from './Authentication';
 import Streams from './Streams';
 
 const Application: React.FC = () => {
-  const [nodeUrl, setNodeUrl] = useState('https://gateway.ceramic.network/');
+  const [nodeUrl, setNodeUrl] = useState('https://gateway-clay.ceramic.network/');
   const [loading, setLoading] = useState(false);
   const [ceramicInstance, setCeramicInstance] = useState<CeramicClient | null>(null);
   const [supportedChains, setSupportedChains] = useState<string[]>([]);
@@ -25,9 +25,9 @@ const Application: React.FC = () => {
       ceramic.did = did;
 
       const chains = await ceramic.getSupportedChains();
-
+      
       setCeramicInstance(ceramic);
-      setSupportedChains(chains);
+      setSupportedChains(chains || []);
     } catch (e) {
       console.log(e);
       alert(e.message);
